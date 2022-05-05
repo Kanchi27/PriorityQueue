@@ -1,5 +1,10 @@
 // Priority Queue
 // element with 1 priority should be preferred while insertion and deletion from queue
+// implement using min heap ,as parent will have highest priority (lowest value)
+// parent of i'th node : Math.ceil((i-1)/2)
+// child;s of i'th parent : 
+//  left :  2 * i + 1
+//  right : 2 * i + 2
 
 class Node {
   constructor(val,priority){
