@@ -14,7 +14,7 @@ class Node {
 }
 class PriorityQueue {
   constructor(){
-    this.values = [];
+    this.values = [];    // min heap represented as array, every new elem will be pushed to last index , and depending on priority can be bubbled up
   }
   get size() {
     return this.values.length;
@@ -39,7 +39,7 @@ class PriorityQueue {
       let parent = this.values[parentIdx];
       const ele = this.values[idx];
       if(parent.priority <= ele.priority){
-        break;
+        break; // elem is at correct position as it has greater compared to its parent (less priority)
       }
           this.values[parentIdx] = ele;
           this.values[idx] = parent;
@@ -47,19 +47,19 @@ class PriorityQueue {
       
     }
   }
-  dequeue(index=0){
+  dequeue(index=0){. // dequeue will always remove root, (aka poll), as that will have highest priority
     if (!this.size) return null;
-    this.swap(index, this.size - 1); // swap with last
-    const value = this.values.pop(); // remove element
-    this.bubbleDown(index);
+    this.swap(index, this.size - 1); // swap root( default, or any elem to be dequeued) with last index
+    const value = this.values.pop(); // remove that element, which is now at the last
+    this.bubbleDown(index); // the prev last elem which was swapped to root,  find its correct position
     return this;
   }
 
   bubbleDown(index=0) {
     const left = (i) => 2 * i + 1;   
     const right = (i) => 2 * i + 2;  
-    const getMin = (i) => (right(i) < this.size
-      && this.comparator(right(i), left(i)) < 0 ? right(i) : left(i));
+    // check for right node, if its not exisiting, min is left,   
+    const getMin = (i) => ( right(i) < this.size && this.comparator(right(i), left(i)) < 0 ? right(i) : left(i));
 
     while (left(index) < this.size && this.comparator(getMin(index),index ) <0) {
         const min = getMin(index);
