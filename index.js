@@ -28,7 +28,7 @@ class PriorityQueue {
   }
 
   bubbleUp(){
-    let idx = this.size -1;
+    let idx = this.size -1; //last index
     while(idx>0){
       let parentIdx = Math.ceil((idx-1)/2);
       let parent = this.values[parentIdx];
